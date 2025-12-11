@@ -1,495 +1,146 @@
-import React, { useState } from "react"; 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makati Services</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900">
 
-// Makati Services - Single file React component (Tailwind-ready)
-// Usage: drop into a create-react-app or preview in an environment with Tailwind CSS available.
-
-export default function App() {
-  const [page, setPage] = useState("home");
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    device: "Laptop",
-    issue: "",
-    address: "",
-    datetime: "",
-    service: "Screen Replacement",
-  });
-  const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-
-  function validateContact() {
-    const e = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    if (!form.phone.trim()) e.phone = "Phone is required";
-    if (form.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email)) e.email = "Invalid email";
-    if (!form.issue.trim()) e.issue = "Describe the issue";
-    return e;
-  }
-
-  function handleSubmit(ev) {
-    ev.preventDefault();
-    const e = validateContact();
-    setErrors(e);
-    if (Object.keys(e).length === 0) {
-      // In production replace with API call or mailer
-      console.log("Booking request:", form);
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 5000);
-    }
-  }
-
-  function handleChange(e) {
-    setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
-  }
-
-  const Services = [
-    {
-      id: "screen",
-      title: "Screen Replacement",
-      desc: "Laptop and desktop monitor screen repairs and replacements. Same-day on-site fixes when parts available.",
-      starts: "From ₱500",
-    },
-    {
-      id: "virus",
-      title: "Virus & Malware Removal",
-      desc: "Thorough cleaning of viruses, spyware and malware. We restore performance and secure your device.",
-      starts: "From ₱500",
-    },
-    {
-      id: "upgrade",
-      title: "Hardware Upgrades",
-      desc: "RAM, SSD, HDD installation/upgrades to boost performance — on-site for most upgrades.",
-      starts: "From ₱500",
-    },
-    {
-      id: "data",
-      title: "Data Recovery",
-      desc: "Recover lost or corrupted files (logical recoveries). We evaluate and quote before attempting deeper recovery.",
-      starts: "From ₱500",
-    },
-    {
-      id: "web",
-      title: "Website Creation",
-      desc: "Basic business websites for micro businesses — add-on service while on-site or remotely.",
-      starts: "From ₱2,500",
-    },
-    {
-      id: "cyber",
-      title: "Cybersecurity / Vulnerability Scanning",
-      desc: "Vulnerability scanning and consultancy (Nessus/Tenable expertise) — ideal for small businesses.",
-      starts: "From ₱1,500",
-    },
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
-      {/* Sticky header */}
-      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Makati Services" className="w-12 h-12 object-contain" />
-            <div>
-              <div className="font-semibold text-lg">Makati Services</div>
-              <div className="text-xs text-gray-500">Your computer would tell you to contact us</div>
-            </div>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-4">
-            <button onClick={() => setPage("home")} className="hover:underline">Home</button>
-            <button onClick={() => setPage("services")} className="hover:underline">Services</button>
-            <button onClick={() => setPage("process")} className="hover:underline">How It Works</button>
-            <button onClick={() => setPage("about")} className="hover:underline">About</button>
-            <button onClick={() => setPage("areas")} className="hover:underline">Service Areas</button>
-            <button onClick={() => setPage("reviews")} className="hover:underline">Reviews</button>
-            <button onClick={() => setPage("faq")} className="hover:underline">FAQ</button>
-            <a href="#contact" onClick={() => setPage("contact")} className="ml-2 bg-blue-600 text-white px-4 py-2 rounded-md shadow">Book Now</a>
-          </nav>
-
-          <div className="md:hidden">
-            <select
-              className="bg-white border rounded p-1"
-              value={page}
-              onChange={(e) => setPage(e.target.value)}
-            >
-              <option value="home">Home</option>
-              <option value="services">Services</option>
-              <option value="process">How It Works</option>
-              <option value="about">About</option>
-              <option value="areas">Service Areas</option>
-              <option value="reviews">Reviews</option>
-              <option value="faq">FAQ</option>
-              <option value="contact">Contact</option>
-            </select>
-          </div>
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="logo.png" alt="Makati Services" class="w-12 h-12 object-contain">
+        <div>
+          <div class="font-semibold text-lg">Makati Services</div>
+          <div class="text-xs text-gray-500">Your computer would tell you to contact us</div>
         </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        {page === "home" && (
-          <section>
-            {/* Hero */}
-            <div className="grid md:grid-cols-2 gap-6 items-center">
-              <div>
-                <h1 className="text-3xl md:text-4xl font-bold">Makati Services</h1>
-                <p className="mt-2 text-gray-600">Your computer would tell you to contact us — On-site laptop & desktop repair across Makati, Taguig and Metro Manila.</p>
-
-                <div className="mt-6 flex gap-3">
-                  <a href="#contact" onClick={() => setPage("contact")} className="bg-blue-600 text-white px-5 py-3 rounded-md shadow">Book On-Site Repair</a>
-                  <a href="#services" onClick={() => setPage("services")} className="border border-blue-600 text-blue-600 px-5 py-3 rounded-md">View Services</a>
-                </div>
-
-                <div className="mt-6 grid grid-cols-3 gap-3 text-sm">
-                  <div className="bg-white p-3 rounded shadow-sm">
-                    <div className="text-2xl font-semibold">5+</div>
-                    <div className="text-gray-500">Years in Business</div>
-                  </div>
-                  <div className="bg-white p-3 rounded shadow-sm">
-                    <div className="text-2xl font-semibold">100s</div>
-                    <div className="text-gray-500">Satisfied Customers</div>
-                  </div>
-                  <div className="bg-white p-3 rounded shadow-sm">
-                    <div className="text-2xl font-semibold">TESDA</div>
-                    <div className="text-gray-500">NC II Certified</div>
-                  </div>
-                </div>
-
-                {/* Testimonials preview */}
-                <div className="mt-6">
-                  <h3 className="font-semibold">Customer testimonials</h3>
-                  <div className="mt-3 bg-white p-4 rounded shadow-sm">
-                    <blockquote className="italic text-gray-700">"Fast, honest, and fixed my laptop the same day!"</blockquote>
-                    <div className="mt-2 text-sm text-gray-500">— Real Facebook review</div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div className="bg-gradient-to-br from-blue-50 to-white rounded-lg p-6 shadow-inner">
-                  <h4 className="font-semibold">Quick service overview</h4>
-                  <ul className="mt-3 space-y-2 text-sm">
-                    {Services.map((s) => (
-                      <li key={s.id} className="flex items-start gap-3">
-                        <div className="w-10 h-10 rounded bg-white flex items-center justify-center shadow">🔧</div>
-                        <div>
-                          <div className="font-medium">{s.title}</div>
-                          <div className="text-xs text-gray-500">{s.starts}</div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-4 text-xs text-gray-600">Flat rate pricing starting from ₱500. Transportation fee may apply for distant locations. No fix, no pay.</div>
-                </div>
-
-                {/* Simple gallery / before-after placeholder */}
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="bg-white rounded p-3 shadow text-center">Before (example)</div>
-                  <div className="bg-white rounded p-3 shadow text-center">After (example)</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Secondary CTA */}
-            <div className="mt-10 bg-white rounded-lg p-6 shadow flex flex-col md:flex-row items-center justify-between">
-              <div>
-                <div className="font-semibold">Need help right away?</div>
-                <div className="text-sm text-gray-500">Call us or send a message on Facebook Messenger for quick assistance.</div>
-              </div>
-              <div className="mt-4 md:mt-0 flex gap-3">
-                <a href="tel:+639171234567" className="px-4 py-2 bg-green-600 text-white rounded">Call Now</a>
-                <a href="https://m.me/yourfacebookpage" target="_blank" rel="noreferrer" className="px-4 py-2 border rounded">Message</a>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {page === "services" && (
-          <section id="services">
-            <h2 className="text-2xl font-bold">Our Services</h2>
-            <p className="text-gray-600 mt-2">Detailed descriptions, typical issues solved and starting prices. Click a service to contact us for a booking.</p>
-
-            <div className="mt-6 grid md:grid-cols-2 gap-4">
-              {Services.map((s) => (
-                <article key={s.id} className="bg-white rounded shadow p-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">{s.title}</h3>
-                    <div className="text-sm text-gray-500">{s.starts}</div>
-                  </div>
-                  <p className="mt-2 text-sm text-gray-700">{s.desc}</p>
-                  <ul className="mt-3 text-sm list-disc pl-5 text-gray-600">
-                    <li>What we include: on-site diagnostic, parts fit & test, cleanup.</li>
-                    <li>Typical issues: {s.title === "Screen Replacement" ? "cracked screens, dead pixels" : "performance or boot issues"}.</li>
-                    <li>Process: contact → schedule → on-site assessment → fix or bring for repair → pay only if fixed.</li>
-                  </ul>
-                  <div className="mt-3 flex gap-2">
-                    <button onClick={() => setPage("contact")} className="px-3 py-2 bg-blue-600 text-white rounded">Book</button>
-                    <a className="px-3 py-2 border rounded text-sm" href="#" onClick={(e)=>e.preventDefault()}>Learn more</a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {page === "process" && (
-          <section>
-            <h2 className="text-2xl font-bold">How It Works</h2>
-            <div className="mt-4 space-y-4">
-              {[
-                "Contact us via phone, contact form, or Facebook Messenger",
-                "Describe your issue and give basic device details",
-                "We schedule an on-site visit at your preferred time",
-                "Our technician performs an assessment on-site",
-                "We either fix it immediately or take it for repair and return it later",
-                "You pay only if we successfully fix the issue (No Fix, No Pay)",
-              ].map((s, i) => (
-                <div key={i} className="bg-white p-4 rounded shadow flex gap-3">
-                  <div className="w-10 h-10 rounded bg-blue-50 flex items-center justify-center">{i + 1}</div>
-                  <div>
-                    <div className="font-medium">Step {i + 1}</div>
-                    <div className="text-sm text-gray-600">{s}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 text-sm text-gray-700">Important: Standard turnaround times only. We do not offer rush services. Transportation fee applies to distant locations.</div>
-          </section>
-        )}
-
-        {page === "about" && (
-          <section>
-            <h2 className="text-2xl font-bold">About Makati Services</h2>
-            <p className="mt-3 text-gray-700">We have been providing honest, reliable on-site laptop and desktop repair services for over 5 years across Makati, Taguig and greater Metro Manila. Our technicians are TESDA NC II certified, experienced, and focused on transparent pricing and quick, practical fixes.</p>
-
-            <div className="mt-4 grid md:grid-cols-2 gap-4">
-              <div className="bg-white p-4 rounded shadow">
-                <h4 className="font-semibold">Our Story</h4>
-                <p className="text-sm text-gray-600 mt-2">We transitioned from a physical shop to an on-site service during the pandemic to bring convenience directly to our customers' homes and offices.</p>
-              </div>
-              <div className="bg-white p-4 rounded shadow">
-                <h4 className="font-semibold">Why Choose Us</h4>
-                <ul className="text-sm text-gray-600 list-disc pl-5 mt-2">
-                  <li>No Fix, No Pay guarantee.</li>
-                  <li>TESDA NC II certified technicians.</li>
-                  <li>Transparent flat-rate pricing starting from ₱500.</li>
-                  <li>On-site convenience — we come to you.</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {page === "areas" && (
-          <section>
-            <h2 className="text-2xl font-bold">Service Areas</h2>
-            <p className="mt-2 text-gray-600">Primary service areas are Makati and Taguig; we also serve the greater Metro Manila area. Transportation fee may apply for distant locations — we'll confirm during booking.</p>
-
-            <div className="mt-4 grid md:grid-cols-2 gap-4">
-              <div className="bg-white p-4 rounded shadow">
-                <h4 className="font-semibold">Makati (Primary)</h4>
-                <div className="text-sm text-gray-600 mt-2">Most on-site visits in Makati have standard transportation included. For distant barangays additional fee may be quoted.</div>
-              </div>
-
-              <div className="bg-white p-4 rounded shadow">
-                <h4 className="font-semibold">Taguig & Metro Manila</h4>
-                <div className="text-sm text-gray-600 mt-2">We cover Taguig and broader Metro Manila. Some areas may have a transportation surcharge.</div>
-              </div>
-            </div>
-
-            <div className="mt-6">
-              <h5 className="font-semibold">Map</h5>
-              <div className="mt-3 bg-white rounded overflow-hidden shadow">
-                {/* Google maps iframe placeholder - replace with real embed + API if needed */}
-                <iframe
-                  title="service-area-map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.1234567890123!2d121.027!3d14.554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1"
-                  width="100%"
-                  height="300"
-                />
-              </div>
-            </div>
-          </section>
-        )}
-
-        {page === "reviews" && (
-          <section>
-            <h2 className="text-2xl font-bold">Customer Reviews</h2>
-            <p className="text-gray-600 mt-2">Imported Facebook reviews and success stories — showing the most helpful recent feedback.</p>
-
-            <div className="mt-4 grid md:grid-cols-2 gap-4">
-              {/* Example review cards. In production, pull these dynamically from Facebook Graph API */}
-              <div className="bg-white p-4 rounded shadow">
-                <div className="font-medium">John D.</div>
-                <div className="text-sm text-gray-600">"Repaired my laptop screen same day and at a fair price. Technician was professional."</div>
-              </div>
-
-              <div className="bg-white p-4 rounded shadow">
-                <div className="font-medium">Anna R.</div>
-                <div className="text-sm text-gray-600">"They removed a virus that other shops couldn't. Highly recommended."</div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {page === "faq" && (
-          <section>
-            <h2 className="text-2xl font-bold">Frequently Asked Questions</h2>
-            <div className="mt-4 space-y-3">
-              {[
-                {
-                  q: "Do you offer warranties?",
-                  a: "We do not offer warranties. We are transparent about this policy and will communicate expected outcomes before work starts.",
-                },
-                {
-                  q: "What is your No Fix, No Pay policy?",
-                  a: "If we are unable to fix the issue we do not charge for the repair. Note: transportation or diagnostic fees may still apply if agreed beforehand.",
-                },
-                { q: "How long do repairs take?", a: "Most on-site repairs are completed within the same visit if parts are available. Some repairs require off-site work.", },
-                { q: "Do you charge for diagnostics?", a: "Standard diagnostic included. For complex investigations we will advise and quote before proceeding.", },
-              ].map((f, i) => (
-                <div className="bg-white p-3 rounded shadow" key={i}>
-                  <div className="font-medium">{f.q}</div>
-                  <div className="text-sm text-gray-600 mt-1">{f.a}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {page === "contact" && (
-          <section id="contact">
-            <h2 className="text-2xl font-bold">Contact & Booking</h2>
-            <p className="text-gray-600 mt-2">Phone calls are the fastest. Use the form below to request a booking. We’ll confirm by phone or Facebook Messenger.</p>
-
-            <div className="mt-6 grid md:grid-cols-2 gap-6">
-              <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow">
-                <div className="grid grid-cols-1 gap-3">
-                  <div>
-                    <label className="text-sm">Name</label>
-                    <input name="name" value={form.name} onChange={handleChange} className="w-full border rounded p-2 mt-1" />
-                    {errors.name && <div className="text-xs text-red-600">{errors.name}</div>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm">Phone</label>
-                    <input name="phone" value={form.phone} onChange={handleChange} className="w-full border rounded p-2 mt-1" />
-                    {errors.phone && <div className="text-xs text-red-600">{errors.phone}</div>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm">Email (optional)</label>
-                    <input name="email" value={form.email} onChange={handleChange} className="w-full border rounded p-2 mt-1" />
-                    {errors.email && <div className="text-xs text-red-600">{errors.email}</div>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm">Device Type</label>
-                    <select name="device" value={form.device} onChange={handleChange} className="w-full border rounded p-2 mt-1">
-                      <option> Laptop </option>
-                      <option> Desktop </option>
-                      <option> Tablet </option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm">Service</label>
-                    <select name="service" value={form.service} onChange={handleChange} className="w-full border rounded p-2 mt-1">
-                      {Services.map((s)=> <option key={s.id}>{s.title}</option>)}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm">Issue Description</label>
-                    <textarea name="issue" value={form.issue} onChange={handleChange} className="w-full border rounded p-2 mt-1" />
-                    {errors.issue && <div className="text-xs text-red-600">{errors.issue}</div>}
-                  </div>
-
-                  <div>
-                    <label className="text-sm">Location / Address</label>
-                    <input name="address" value={form.address} onChange={handleChange} className="w-full border rounded p-2 mt-1" />
-                  </div>
-
-                  <div>
-                    <label className="text-sm">Preferred date & time</label>
-                    <input type="datetime-local" name="datetime" value={form.datetime} onChange={handleChange} className="w-full border rounded p-2 mt-1" />
-                  </div>
-
-                  <div className="flex gap-2 items-center mt-2">
-                    <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">Submit Booking</button>
-                    <button type="button" onClick={()=>{navigator['vibrate']?.(20); setForm({name:'',phone:'',email:'',device:'Laptop',issue:'',address:'',datetime:'',service:'Screen Replacement'});}} className="px-3 py-2 border rounded">Reset</button>
-                    {submitted && <div className="text-sm text-green-600">Request sent — we will contact you shortly.</div>}
-                  </div>
-
-                  <div className="text-xs text-gray-500 mt-3">By submitting you agree our transportation fee policy may apply for distant locations. We operate Mon-Sat 9AM–6PM. No fix, no pay policy applies.</div>
-                </div>
-              </form>
-
-              <div>
-                <div className="bg-white p-4 rounded shadow">
-                  <div className="font-semibold">Contact Details</div>
-                  <div className="mt-2 text-sm text-gray-600">Phone: <a className="text-blue-600" href="tel:+639171234567">+63 917 123 4567</a></div>
-                  <div className="text-sm text-gray-600 mt-1">Email: <a className="text-blue-600" href="mailto:info@makatiservices.com">info@makatiservices.com</a></div>
-                  <div className="text-sm text-gray-600 mt-1">Facebook: <a className="text-blue-600" href="https://facebook.com/yourfacebookpage" target="_blank" rel="noreferrer">Makati Services</a></div>
-
-                  <div className="mt-4">
-                    <h5 className="font-medium">TESDA NC II</h5>
-                    <div className="mt-2 text-sm text-gray-600">Our technicians are TESDA NC II certified. (Display certification badge image if available.)</div>
-                    <img src="/tesda-badge.png" alt="TESDA NC II" className="w-32 mt-3" />
-                  </div>
-
-                  <div className="mt-6">
-                    <h5 className="font-medium">Facebook Reviews</h5>
-                    <div className="mt-2 text-sm text-gray-600">We recommend embedding Facebook reviews via the Facebook Page Plugin or pulling reviews through the Graph API for live updates.</div>
-                  </div>
-                </div>
-
-                <div className="mt-4 bg-white p-4 rounded shadow">
-                  <h5 className="font-medium">Business Hours</h5>
-                  <div className="text-sm text-gray-600 mt-2">Mon–Sat: 9:00 AM — 6:00 PM</div>
-
-                  <h5 className="font-medium mt-4">Policies</h5>
-                  <ul className="text-sm text-gray-600 list-disc pl-5 mt-2">
-                    <li>No Fix, No Pay</li>
-                    <li>Flat rate pricing starting at ₱500</li>
-                    <li>Transportation fee for distant locations</li>
-                    <li>No rush services / No warranties</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Footer */}
-        <footer className="mt-12 border-t pt-6 pb-12">
-          <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-4">
-            <div>
-              <div className="font-semibold">Makati Services</div>
-              <div className="text-sm text-gray-600 mt-2">On-site laptop & desktop repair across Makati, Taguig and Metro Manila.</div>
-            </div>
-            <div>
-              <div className="font-semibold">Quick Links</div>
-              <ul className="text-sm text-gray-600 mt-2 space-y-1">
-                <li><button onClick={()=>setPage('services')}>Services</button></li>
-                <li><button onClick={()=>setPage('process')}>How It Works</button></li>
-                <li><button onClick={()=>setPage('contact')}>Contact</button></li>
-              </ul>
-            </div>
-            <div>
-              <div className="font-semibold">Contact</div>
-              <div className="text-sm text-gray-600 mt-2">Phone: <a className="text-blue-600" href="tel:+639171234567">+63 917 123 4567</a></div>
-              <div className="text-sm text-gray-600">Email: <a className="text-blue-600" href="mailto:info@makatiservices.com">info@makatiservices.com</a></div>
-            </div>
-          </div>
-
-          <div className="mt-6 text-center text-xs text-gray-500">© {new Date().getFullYear()} Makati Services — All rights reserved.</div>
-        </footer>
-
-        {/* Floating messenger / whatsapp button */}
-        <a href="https://m.me/yourfacebookpage" target="_blank" rel="noreferrer" className="fixed right-4 bottom-4 shadow-lg rounded-full bg-blue-600 text-white w-12 h-12 flex items-center justify-center">💬</a>
-
-      </main>
+      </div>
+      <nav class="hidden md:flex items-center gap-4">
+        <a href="#home" class="hover:underline">Home</a>
+        <a href="#services" class="hover:underline">Services</a>
+        <a href="#process" class="hover:underline">How It Works</a>
+        <a href="#about" class="hover:underline">About</a>
+        <a href="#areas" class="hover:underline">Service Areas</a>
+        <a href="#reviews" class="hover:underline">Reviews</a>
+        <a href="#faq" class="hover:underline">FAQ</a>
+        <a href="#contact" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded-md shadow">Book Now</a>
+      </nav>
     </div>
-  );
-}
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Home Section -->
+    <section id="home" class="grid md:grid-cols-2 gap-6 items-center">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-bold">Makati Services</h1>
+        <p class="mt-2 text-gray-600">Your computer would tell you to contact us — On-site laptop & desktop repair across Makati, Taguig and Metro Manila.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#contact" class="bg-blue-600 text-white px-5 py-3 rounded-md shadow">Book On-Site Repair</a>
+          <a href="#services" class="border border-blue-600 text-blue-600 px-5 py-3 rounded-md">View Services</a>
+        </div>
+        <div class="mt-6 grid grid-cols-3 gap-3 text-sm">
+          <div class="bg-white p-3 rounded shadow-sm"><div class="text-2xl font-semibold">5+</div><div class="text-gray-500">Years in Business</div></div>
+          <div class="bg-white p-3 rounded shadow-sm"><div class="text-2xl font-semibold">100s</div><div class="text-gray-500">Satisfied Customers</div></div>
+          <div class="bg-white p-3 rounded shadow-sm"><div class="text-2xl font-semibold">TESDA</div><div class="text-gray-500">NC II Certified</div></div>
+        </div>
+        <div class="mt-6 bg-white p-4 rounded shadow-sm">
+          <blockquote class="italic text-gray-700">"Fast, honest, and fixed my laptop the same day!"</blockquote>
+          <div class="mt-2 text-sm text-gray-500">— Real Facebook review</div>
+        </div>
+      </div>
+      <div>
+        <div class="bg-gradient-to-br from-blue-50 to-white rounded-lg p-6 shadow-inner">
+          <h4 class="font-semibold">Quick service overview</h4>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li>🔧 Screen Replacement — From ₱500</li>
+            <li>🔧 Virus & Malware Removal — From ₱500</li>
+            <li>🔧 Hardware Upgrades — From ₱500</li>
+            <li>🔧 Data Recovery — From ₱500</li>
+            <li>🔧 Website Creation — From ₱2,500</li>
+            <li>🔧 Cybersecurity / Vulnerability Scanning — From ₱1,500</li>
+          </ul>
+          <div class="mt-4 text-xs text-gray-600">Flat rate pricing starting from ₱500. Transportation fee may apply for distant locations. No fix, no pay.</div>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <div class="bg-white rounded p-3 shadow text-center">Before (example)</div>
+          <div class="bg-white rounded p-3 shadow text-center">After (example)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="mt-12">
+      <h2 class="text-2xl font-bold">Our Services</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <div class="bg-white rounded shadow p-4">
+          <h3 class="font-semibold">Screen Replacement</h3>
+          <p class="text-sm text-gray-700 mt-2">Laptop and desktop monitor screen repairs and replacements.</p>
+          <div class="text-xs text-gray-500 mt-2">From ₱500</div>
+        </div>
+        <div class="bg-white rounded shadow p-4">
+          <h3 class="font-semibold">Virus & Malware Removal</h3>
+          <p class="text-sm text-gray-700 mt-2">Thorough cleaning of viruses, spyware and malware.</p>
+          <div class="text-xs text-gray-500 mt-2">From ₱500</div>
+        </div>
+        <div class="bg-white rounded shadow p-4">
+          <h3 class="font-semibold">Hardware Upgrades</h3>
+          <p class="text-sm text-gray-700 mt-2">RAM, SSD, HDD installation/upgrades to boost performance.</p>
+          <div class="text-xs text-gray-500 mt-2">From ₱500</div>
+        </div>
+        <div class="bg-white rounded shadow p-4">
+          <h3 class="font-semibold">Data Recovery</h3>
+          <p class="text-sm text-gray-700 mt-2">Recover lost or corrupted files.</p>
+          <div class="text-xs text-gray-500 mt-2">From ₱500</div>
+        </div>
+        <div class="bg-white rounded shadow p-4">
+          <h3 class="font-semibold">Website Creation</h3>
+          <p class="text-sm text-gray-700 mt-2">Basic business websites for micro businesses.</p>
+          <div class="text-xs text-gray-500 mt-2">From ₱2,500</div>
+        </div>
+        <div class="bg-white rounded shadow p-4">
+          <h3 class="font-semibold">Cybersecurity / Vulnerability Scanning</h3>
+          <p class="text-sm text-gray-700 mt-2">Vulnerability scanning and consultancy.</p>
+          <div class="text-xs text-gray-500 mt-2">From ₱1,500</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="mt-12">
+      <h2 class="text-2xl font-bold">Contact & Booking</h2>
+      <form class="mt-4 bg-white p-4 rounded shadow grid gap-3">
+        <input type="text" placeholder="Name" class="border rounded p-2">
+        <input type="text" placeholder="Phone" class="border rounded p-2">
+        <input type="email" placeholder="Email (optional)" class="border rounded p-2">
+        <select class="border rounded p-2">
+          <option>Laptop</option>
+          <option>Desktop</option>
+          <option>Tablet</option>
+        </select>
+        <select class="border rounded p-2">
+          <option>Screen Replacement</option>
+          <option>Virus & Malware Removal</option>
+          <option>Hardware Upgrades</option>
+          <option>Data Recovery</option>
+          <option>Website Creation</option>
+          <option>Cybersecurity / Vulnerability Scanning</option>
+        </select>
+        <textarea placeholder="Issue Description" class="border rounded p-2"></textarea>
+        <input type="text" placeholder="Location / Address" class="border rounded p-2">
+        <input type="datetime-local" class="border rounded p-2">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Submit Booking</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="mt-12 border-t pt-6 pb-12 text-center text-xs text-gray-500">
+    © 2025 Makati Services — All rights reserved.
+  </footer>
+
+</body>
+</html>
