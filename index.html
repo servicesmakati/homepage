@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Makati Laptop & Desktop Repair Serices</title>
+<title>Makati Laptop & Desktop Repair Services</title>
   
   <!-- Favicon -->
   <link rel="icon" href="mslogo.webp" type="image/x-icon">
@@ -63,6 +63,9 @@
   .contact-form input, .contact-form select, .contact-form textarea { padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #d1d5db; width: 100%; }
   .contact-form button { background: #10B981; border: none; color: white; padding: 1rem; font-weight: 600; border-radius: 0.5rem; cursor: pointer; transition: 0.3s; }
   .contact-form button:hover { background: #059669; }
+
+  /* Success Message */
+  #successMessage { display: none; color: green; text-align: center; margin-top: 1rem; font-weight: 600; }
 
   /* Footer */
   footer { text-align: center; padding: 2rem; background: #1E3A8A; color: white; }
@@ -199,23 +202,19 @@ KUDOS po sa inyong lahat! Very happy with everything from start to finish!</p>
 
 <section id="contact">
   <h2>Contact & Booking</h2>
- <form class="contact-form" action="https://formspree.io/f/xgvgpvez" method="POST">
-  <input type="text" name="name" placeholder="Full Name" required>
-  <input type="tel" name="phone" placeholder="Phone Number" required>
-  <input type="email" name="email" placeholder="Email">
-  <select name="device">
-    <option>Laptop</option>
-    <option>Desktop</option>
-  </select>
-  <textarea name="issue" placeholder="Issue Description" required></textarea>
-  <input type="text" name="location" placeholder="Location/Address" required>
-  <button type="submit">Submit Booking</button>
-   <div id="successMessage" style="display:none; color:green; text-align:center; margin-top:1rem;">
-  Thank you! Your booking request has been submitted.
-</div>
-
-</form>
-
+  <form class="contact-form" id="bookingForm" action="https://formspree.io/f/xgvgpvez" method="POST">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <input type="email" name="email" placeholder="Email">
+    <select name="device">
+      <option>Laptop</option>
+      <option>Desktop</option>
+    </select>
+    <textarea name="issue" placeholder="Issue Description" required></textarea>
+    <input type="text" name="location" placeholder="Location/Address" required>
+    <button type="submit">Submit Booking</button>
+  </form>
+  <div id="successMessage">Thank you! Your booking request has been submitted.</div>
 </section>
 
 <footer>
@@ -232,8 +231,23 @@ KUDOS po sa inyong lahat! Very happy with everything from start to finish!</p>
   function scrollToContact(){ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
   function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
 
-  // Form Submission
-  function submitForm(){ alert('Thank you! Your booking request has been submitted.'); return false; }
+  // Form Submission to Formspree
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // prevent page reload
+    const form = e.target;
+    fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        document.getElementById('successMessage').style.display = 'block';
+        form.reset();
+      } else {
+        alert('Oops! There was a problem submitting your form.');
+      }
+    });
+  });
 
   // Simple Testimonial Carousel
   let track = document.getElementById('testimonialTrack');
