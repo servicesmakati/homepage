@@ -199,15 +199,23 @@ KUDOS po sa inyong lahat! Very happy with everything from start to finish!</p>
 
 <section id="contact">
   <h2>Contact & Booking</h2>
-  <form class="contact-form" onsubmit="return submitForm()">
-    <input type="text" placeholder="Full Name" required>
-    <input type="tel" placeholder="Phone Number" required>
-    <input type="email" placeholder="Email">
-    <select><option>Laptop</option><option>Desktop</option></select>
-    <textarea placeholder="Issue Description" required></textarea>
-    <input type="text" placeholder="Location/Address" required>
-    <button type="submit">Submit Booking</button>
-  </form>
+ <form class="contact-form" action="https://formspree.io/f/xgvgpvez" method="POST">
+  <input type="text" name="name" placeholder="Full Name" required>
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+  <input type="email" name="email" placeholder="Email">
+  <select name="device">
+    <option>Laptop</option>
+    <option>Desktop</option>
+  </select>
+  <textarea name="issue" placeholder="Issue Description" required></textarea>
+  <input type="text" name="location" placeholder="Location/Address" required>
+  <button type="submit">Submit Booking</button>
+   <div id="successMessage" style="display:none; color:green; text-align:center; margin-top:1rem;">
+  Thank you! Your booking request has been submitted.
+</div>
+
+</form>
+
 </section>
 
 <footer>
