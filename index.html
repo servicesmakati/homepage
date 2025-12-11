@@ -3,149 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Makati Services</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+<title>Makati Laptop & Desktop Repair</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  .hero-bg { background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%); }
-  .service-card:hover { transform: translateY(-5px); transition: 0.3s; }
+  /* Basic Reset & Fonts */
+  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1f2937; }
+
+  /* Header */
+  header { position: sticky; top:0; background: #1E3A8A; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+  header nav a { margin-left: 1.5rem; color: white; text-decoration: none; font-weight: 600; transition: 0.3s; }
+  header nav a:hover { color: #3B82F6; }
+
+  /* Hero Section */
+  .hero { height: 100vh; background: linear-gradient(135deg, #1E3A8A, #2563EB); display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 2rem; }
+  .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInDown 1s ease-out; }
+  .hero p { font-size: 1.2rem; margin-bottom: 2rem; animation: fadeInUp 1s ease-out; }
+  .hero .cta { padding: 0.8rem 2rem; margin: 0 0.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+  .cta-primary { background: #10B981; border: none; color: white; }
+  .cta-primary:hover { background: #059669; }
+  .cta-secondary { background: transparent; border: 2px solid white; color: white; }
+  .cta-secondary:hover { background: white; color: #1E3A8A; }
+
+  @keyframes fadeInDown { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
+  @keyframes fadeInUp { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+
+  /* Sections */
+  section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+  section h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: #1E3A8A; }
+
+  /* Services */
+  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 2rem; }
+  .service-card { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 8px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+  .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 25px rgba(0,0,0,0.2); }
+  .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #2563EB; }
+  .service-card p { margin-bottom: 1rem; color: #374151; }
+  .service-card span { font-weight: 600; color: #10B981; }
+
+  /* Process Timeline */
+  .timeline { display: flex; flex-direction: column; gap: 2rem; }
+  .timeline-item { display: flex; align-items: flex-start; gap: 1rem; }
+  .timeline-item div.circle { width: 20px; height: 20px; background: #2563EB; border-radius: 50%; margin-top: 0.5rem; }
+  .timeline-item div.content { background: #f0f9ff; padding: 1rem 1.5rem; border-radius: 0.5rem; flex:1; }
+  .timeline-item div.content h4 { margin-bottom: 0.5rem; color: #1E3A8A; }
+  
+  /* Testimonials Carousel */
+  .testimonials { position: relative; overflow: hidden; }
+  .testimonials-track { display: flex; transition: transform 0.5s ease-in-out; }
+  .testimonial { min-width: 300px; margin: 0 1rem; background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+  .testimonial p { font-style: italic; margin-bottom: 1rem; }
+  .testimonial h5 { font-weight: 600; color: #2563EB; }
+
+  /* Contact Form */
+  .contact-form { display: grid; gap: 1rem; max-width: 600px; margin: 0 auto; }
+  .contact-form input, .contact-form select, .contact-form textarea { padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #d1d5db; width: 100%; }
+  .contact-form button { background: #10B981; border: none; color: white; padding: 1rem; font-weight: 600; border-radius: 0.5rem; cursor: pointer; transition: 0.3s; }
+  .contact-form button:hover { background: #059669; }
+
+  /* Footer */
+  footer { text-align: center; padding: 2rem; background: #1E3A8A; color: white; }
+  
+  /* Floating Chat Buttons */
+  .chat-buttons { position: fixed; bottom: 1rem; right: 1rem; display: flex; flex-direction: column; gap: 1rem; z-index: 1000; }
+  .chat-buttons a { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #2563EB; color: white; font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+  .chat-buttons a:hover { background: #3B82F6; }
+
+  @media(max-width:768px){ .timeline { flex-direction: column; } }
 </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body>
 
-<!-- Header -->
-<header class="sticky top-0 z-50 bg-white shadow-md">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <img src="logo.png" alt="Makati Services Logo" class="h-12 w-12">
-      <div>
-        <h1 class="text-xl font-bold">Makati Services</h1>
-        <p class="text-sm text-gray-500">Your computer would tell you to contact us</p>
-      </div>
-    </div>
-    <div class="space-x-4 hidden md:flex">
-      <a href="#home" class="hover:text-blue-600">Home</a>
-      <a href="#services" class="hover:text-blue-600">Services</a>
-      <a href="#process" class="hover:text-blue-600">How It Works</a>
-      <a href="#about" class="hover:text-blue-600">About Us</a>
-      <a href="#areas" class="hover:text-blue-600">Service Areas</a>
-      <a href="#reviews" class="hover:text-blue-600">Testimonials</a>
-      <a href="#faq" class="hover:text-blue-600">FAQ</a>
-      <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Book Now</a>
-    </div>
-  </div>
+<header>
+  <div><strong>Makati Repair</strong></div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#process">How It Works</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<main class="max-w-7xl mx-auto px-4 py-8">
-
-<!-- Hero Section -->
-<section id="home" class="hero-bg text-white rounded-lg p-12 grid md:grid-cols-2 gap-8 items-center">
+<section class="hero">
   <div>
-    <h2 class="text-4xl md:text-5xl font-bold">Reliable On-Site Laptop & Desktop Repairs</h2>
-    <p class="mt-4 text-lg md:text-xl">Serving Makati, Taguig, and Metro Manila for 5 years. Hundreds of satisfied customers. TESDA NC II certified technicians.</p>
-    <div class="mt-6 space-x-3">
-      <a href="#contact" class="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-md shadow font-semibold">Book On-Site Repair Now</a>
-      <a href="#services" class="border border-white hover:bg-white hover:text-blue-800 px-6 py-3 rounded-md font-semibold">View Services</a>
-    </div>
-  </div>
-  <div>
-    <img src="hero-image.png" alt="Laptop Repair" class="rounded-lg shadow-xl">
-  </div>
-</section>
-
-<!-- Services Section -->
-<section id="services" class="mt-12">
-  <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Our Services</h2>
-  <div class="grid md:grid-cols-3 gap-6">
-    <div class="service-card bg-white p-6 rounded shadow hover:shadow-xl">
-      <h3 class="font-semibold text-lg mb-2">Screen Replacement</h3>
-      <p class="text-gray-600">Laptop and desktop monitor screen repairs and replacements.</p>
-      <p class="mt-2 font-bold text-blue-600">Starting at ₱500</p>
-    </div>
-    <div class="service-card bg-white p-6 rounded shadow hover:shadow-xl">
-      <h3 class="font-semibold text-lg mb-2">Virus Removal</h3>
-      <p class="text-gray-600">Malware, spyware, and virus removal for safe computer performance.</p>
-      <p class="mt-2 font-bold text-blue-600">Starting at ₱500</p>
-    </div>
-    <div class="service-card bg-white p-6 rounded shadow hover:shadow-xl">
-      <h3 class="font-semibold text-lg mb-2">Hardware Upgrades</h3>
-      <p class="text-gray-600">RAM, SSD, and HDD upgrades for faster and better performance.</p>
-      <p class="mt-2 font-bold text-blue-600">Starting at ₱500</p>
-    </div>
-    <div class="service-card bg-white p-6 rounded shadow hover:shadow-xl">
-      <h3 class="font-semibold text-lg mb-2">Data Recovery</h3>
-      <p class="text-gray-600">Recover lost or corrupted files from laptops and desktops.</p>
-      <p class="mt-2 font-bold text-blue-600">Starting at ₱500</p>
-    </div>
-    <div class="service-card bg-white p-6 rounded shadow hover:shadow-xl">
-      <h3 class="font-semibold text-lg mb-2">Website Creation</h3>
-      <p class="text-gray-600">Basic business websites to grow your small business online.</p>
-      <p class="mt-2 font-bold text-blue-600">Starting at ₱2,500</p>
-    </div>
-    <div class="service-card bg-white p-6 rounded shadow hover:shadow-xl">
-      <h3 class="font-semibold text-lg mb-2">Cybersecurity / Vulnerability Scanning</h3>
-      <p class="text-gray-600">Vulnerability scanning and basic cybersecurity consulting.</p>
-      <p class="mt-2 font-bold text-blue-600">Starting at ₱1,500</p>
+    <h1>Reliable Laptop & Desktop Repairs</h1>
+    <p>Serving Makati, Taguig, and Metro Manila with certified technicians and trusted service.</p>
+    <div>
+      <button class="cta cta-primary" onclick="scrollToContact()">Book Now</button>
+      <button class="cta cta-secondary" onclick="scrollToSection('services')">Our Services</button>
     </div>
   </div>
 </section>
 
-<!-- How It Works Section -->
-<section id="process" class="mt-12 bg-blue-50 p-8 rounded-lg">
-  <h2 class="text-3xl font-bold mb-4 text-center text-blue-800">How It Works</h2>
-  <ol class="list-decimal list-inside space-y-3 text-gray-700">
-    <li>Contact us via phone, contact form, or Facebook Messenger.</li>
-    <li>Describe your issue to our technician.</li>
-    <li>Schedule an on-site visit at your convenience.</li>
-    <li>Technician assesses and repairs your device on-site or takes it if needed.</li>
-    <li>Payment only if the repair is successful. No Fix, No Pay.</li>
-  </ol>
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="service-card">
+      <h3>Screen Replacement</h3>
+      <p>Fix broken or cracked screens for laptops and desktops.</p>
+      <span>Starting at ₱500</span>
+    </div>
+    <div class="service-card">
+      <h3>Virus Removal</h3>
+      <p>Malware, spyware, and virus cleaning for safe performance.</p>
+      <span>Starting at ₱500</span>
+    </div>
+    <div class="service-card">
+      <h3>Hardware Upgrades</h3>
+      <p>RAM, SSD, HDD upgrades and installations.</p>
+      <span>Starting at ₱500</span>
+    </div>
+    <div class="service-card">
+      <h3>Data Recovery</h3>
+      <p>Recover lost or corrupted files securely.</p>
+      <span>Starting at ₱500</span>
+    </div>
+    <div class="service-card">
+      <h3>Website Creation</h3>
+      <p>Basic business website setup for small businesses.</p>
+      <span>Starting at ₱2,500</span>
+    </div>
+    <div class="service-card">
+      <h3>Cybersecurity</h3>
+      <p>Vulnerability scanning and security consulting.</p>
+      <span>Starting at ₱1,500</span>
+    </div>
+  </div>
 </section>
 
-<!-- About Us Section -->
-<section id="about" class="mt-12 p-8 bg-white rounded-lg shadow">
-  <h2 class="text-3xl font-bold mb-4 text-gray-800">About Us</h2>
-  <p class="text-gray-700">Makati Services has been providing reliable laptop and desktop repairs for almost 5 years. TESDA NC II certified. Transitioned to fully on-site service during the pandemic to ensure safety and convenience.</p>
-  <p class="mt-2 text-gray-700">Mission: Provide honest, professional, and convenient technical support. No fix, no pay, certified technicians, trusted by hundreds of customers.</p>
+<section id="process">
+  <h2>How It Works</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="circle"></div>
+      <div class="content"><h4>Contact Us</h4><p>Reach out via phone, form, or Messenger to describe your issue.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="circle"></div>
+      <div class="content"><h4>Schedule Visit</h4><p>Set a convenient time for our technician to visit.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="circle"></div>
+      <div class="content"><h4>Repair & Assessment</h4><p>We fix your device on-site or take it for repair if necessary.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="circle"></div>
+      <div class="content"><h4>Payment</h4><p>Only pay if the repair is successful — No Fix, No Pay policy.</p></div>
+    </div>
+  </div>
 </section>
 
-<!-- Contact Section with JS validation -->
-<section id="contact" class="mt-12 mb-12 p-8 bg-blue-50 rounded-lg shadow">
-  <h2 class="text-3xl font-bold mb-4 text-blue-800">Contact & Booking</h2>
-  <form id="bookingForm" class="grid gap-3 bg-white p-6 rounded shadow" onsubmit="return submitForm()">
-    <input type="text" name="name" placeholder="Full Name" class="border rounded p-2" required>
-    <input type="tel" name="phone" placeholder="Phone Number" class="border rounded p-2" required>
-    <input type="email" name="email" placeholder="Email" class="border rounded p-2">
-    <select name="device" class="border rounded p-2">
-      <option>Laptop</option>
-      <option>Desktop</option>
-    </select>
-    <textarea name="issue" placeholder="Issue Description" class="border rounded p-2" required></textarea>
-    <input type="text" name="location" placeholder="Location/Address" class="border rounded p-2" required>
-    <input type="datetime-local" name="datetime" class="border rounded p-2">
-    <select name="service" class="border rounded p-2">
-      <option>Screen Replacement</option>
-      <option>Virus Removal</option>
-      <option>Hardware Upgrades</option>
-      <option>Data Recovery</option>
-      <option>Website Creation</option>
-      <option>Cybersecurity</option>
-    </select>
-    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Submit Booking</button>
+<section id="testimonials">
+  <h2>Testimonials</h2>
+  <div class="testimonials">
+    <div class="testimonials-track" id="testimonialTrack">
+      <div class="testimonial"><p>Excellent service, fast repair!</p><h5>- Juan D.</h5></div>
+      <div class="testimonial"><p>Technician was very professional and polite.</p><h5>- Maria L.</h5></div>
+      <div class="testimonial"><p>Highly recommend for laptop screen replacement.</p><h5>- Carlo S.</h5></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact & Booking</h2>
+  <form class="contact-form" onsubmit="return submitForm()">
+    <input type="text" placeholder="Full Name" required>
+    <input type="tel" placeholder="Phone Number" required>
+    <input type="email" placeholder="Email">
+    <select><option>Laptop</option><option>Desktop</option></select>
+    <textarea placeholder="Issue Description" required></textarea>
+    <input type="text" placeholder="Location/Address" required>
+    <button type="submit">Submit Booking</button>
   </form>
 </section>
 
-<script>
-function submitForm() {
-  alert('Thank you! Your booking request has been submitted.');
-  return false;
-}
-</script>
-
-<!-- Footer -->
-<footer class="bg-gray-100 text-center py-6 text-gray-500 text-sm">
-  © 2025 Makati Services — All rights reserved.
+<footer>
+  &copy; 2025 Makati Laptop & Desktop Repair. All rights reserved.
 </footer>
+
+<div class="chat-buttons">
+  <a href="https://m.me/YourFacebookPage" target="_blank">💬</a>
+  <a href="https://wa.me/YourPhoneNumber" target="_blank">📱</a>
+</div>
+
+<script>
+  // Smooth Scroll Buttons
+  function scrollToContact(){ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+  function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+  // Form Submission
+  function submitForm(){ alert('Thank you! Your booking request has been submitted.'); return false; }
+
+  // Simple Testimonial Carousel
+  let track = document.getElementById('testimonialTrack');
+  let offset = 0;
+  setInterval(()=>{ offset -= 320; if(Math.abs(offset) >= track.scrollWidth/2) offset=0; track.style.transform = `translateX(${offset}px)`; }, 3000);
+</script>
 
 </body>
 </html>
