@@ -3,122 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Makati Services | IT & Cybersecurity Solutions</title>
+<title>Makati Laptop & Desktop Repair Services</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="mslogo.webp" type="image/x-icon">
 
-<link rel="icon" href="mslogo.webp" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:#f8fafc;color:#1f2937}
+  /* Basic Reset & Fonts */
+  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1f2937; }
 
-header{position:sticky;top:0;background:#0f172a;color:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:1000}
-header nav a{margin-left:1.5rem;color:white;text-decoration:none;font-weight:600}
-header nav a:hover{color:#38bdf8}
+  /* Header */
+  header { position: sticky; top:0; background: #1E3A8A; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
+  header nav a { margin-left: 1.5rem; color: white; text-decoration: none; font-weight: 600; transition: 0.3s; }
+  header nav a:hover { color: #3B82F6; }
 
-.hero{height:100vh;background:linear-gradient(135deg,#020617,#1e3a8a);display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:2rem}
-.hero h1{font-size:3rem;margin-bottom:1rem}
-.hero p{font-size:1.2rem;margin-bottom:2rem;max-width:700px}
+  /* Hero Section */
+  .hero { height: 100vh; background: linear-gradient(135deg, #1E3A8A, #2563EB); display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 2rem; }
+  .hero h1 { font-size: 3rem; margin-bottom: 1rem; animation: fadeInDown 1s ease-out; }
+  .hero p { font-size: 1.2rem; margin-bottom: 2rem; animation: fadeInUp 1s ease-out; }
+  .hero .cta { padding: 0.8rem 2rem; margin: 0 0.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+  .cta-primary { background: #10B981; border: none; color: white; }
+  .cta-primary:hover { background: #059669; }
+  .cta-secondary { background: transparent; border: 2px solid white; color: white; }
+  .cta-secondary:hover { background: white; color: #1E3A8A; }
 
-.cta{padding:.8rem 2rem;border-radius:.5rem;font-weight:600;cursor:pointer}
-.cta-primary{background:#22c55e;border:none;color:white}
-.cta-secondary{background:transparent;border:2px solid white;color:white}
+  @keyframes fadeInDown { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
+  @keyframes fadeInUp { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
 
-section{padding:6rem 2rem;max-width:1200px;margin:auto}
-section h2{text-align:center;font-size:2.4rem;margin-bottom:2rem;color:#1e3a8a}
+  /* Sections */
+  section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+  section h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: #1E3A8A; }
 
-.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem}
-.card{background:white;padding:2rem;border-radius:1rem;box-shadow:0 10px 20px rgba(0,0,0,.08)}
-.card h3{color:#2563eb;margin-bottom:.5rem}
-.card span{font-weight:600;color:#16a34a}
+  /* Services */
+  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 2rem; }
+  .service-card { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 8px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+  .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 25px rgba(0,0,0,0.2); }
+  .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #2563EB; }
+  .service-card p { margin-bottom: 1rem; color: #374151; }
+  .service-card span { font-weight: 600; color: #10B981; }
 
-.cyber{background:#020617;color:white;border-radius:1rem;padding:3rem}
-.cyber h3{color:#38bdf8}
-.cyber ul{margin-top:1rem;padding-left:1.2rem}
-.cyber li{margin-bottom:.5rem}
+  /* Process Timeline */
+  .timeline { display: flex; flex-direction: column; gap: 2rem; }
+  .timeline-item { display: flex; align-items: flex-start; gap: 1rem; }
+  .timeline-item div.circle { width: 20px; height: 20px; background: #2563EB; border-radius: 50%; margin-top: 0.5rem; }
+  .timeline-item div.content { background: #f0f9ff; padding: 1rem 1.5rem; border-radius: 0.5rem; flex:1; }
+  .timeline-item div.content h4 { margin-bottom: 0.5rem; color: #1E3A8A; }
+  
+  /* Testimonials Carousel */
+  .testimonials { position: relative; overflow: hidden; }
+  .testimonials-track { display: flex; transition: transform 0.5s ease-in-out; }
+  .testimonial { min-width: 300px; margin: 0 1rem; background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+  .testimonial p { font-style: italic; margin-bottom: 1rem; }
+  .testimonial h5 { font-weight: 600; color: #2563EB; }
 
-footer{text-align:center;padding:2rem;background:#020617;color:white}
+  /* Contact Form */
+  .contact-form { display: grid; gap: 1rem; max-width: 600px; margin: 0 auto; }
+  .contact-form input, .contact-form select, .contact-form textarea { padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #d1d5db; width: 100%; }
+  .contact-form button { background: #10B981; border: none; color: white; padding: 1rem; font-weight: 600; border-radius: 0.5rem; cursor: pointer; transition: 0.3s; }
+  .contact-form button:hover { background: #059669; }
 
-.chat-buttons{position:fixed;bottom:1rem;right:1rem}
-.chat-buttons a{width:60px;height:60px;border-radius:50%;background:#2563eb;color:white;font-size:1.5rem;display:flex;align-items:center;justify-content:center;text-decoration:none}
+  /* Footer */
+  footer { text-align: center; padding: 2rem; background: #1E3A8A; color: white; }
+  
+  /* Floating Chat Buttons */
+  .chat-buttons { position: fixed; bottom: 1rem; right: 1rem; display: flex; flex-direction: column; gap: 1rem; z-index: 1000; }
+  .chat-buttons a { display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #2563EB; color: white; font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
+  .chat-buttons a:hover { background: #3B82F6; }
+
+  @media(max-width:768px){ .timeline { flex-direction: column; } }
 </style>
 </head>
-
 <body>
 
 <header>
-  <img src="mslogo.webp" height="45">
+  <div class="logo">
+    <a href="#">
+      <img src="mslogo.webp" alt="Makati Repair Logo" style="height:50px;">
+    </a>
+  </div>
   <nav>
-    <a href="#services">IT Services</a>
-    <a href="#cybersecurity">Cybersecurity</a>
-    <a href="#process">Process</a>
+    <a href="#services">Services</a>
+    <a href="#process">How It Works</a>
+    <a href="#testimonials">Testimonials</a>
     <a href="#contact">Contact</a>
   </nav>
 </header>
 
+
 <section class="hero">
   <div>
-    <h1>IT & Cybersecurity Services for Small Businesses</h1>
-    <p>
-      We provide reliable hardware repair, vulnerability assessment, and practical security solutions
-      for individuals and growing businesses across Metro Manila.
-    </p>
-    <button class="cta cta-primary" onclick="document.getElementById('contact').scrollIntoView()">Get Started</button>
+    <h1>Reliable Laptop & Desktop Repairs</h1>
+    <p>Serving Makati, Taguig, and Metro Manila with certified technicians and trusted service.</p>
+    <div>
+      <button class="cta cta-primary" onclick="scrollToContact()">Book Now</button>
+      <button class="cta cta-secondary" onclick="scrollToSection('services')">Our Services</button>
+    </div>
   </div>
 </section>
 
 <section id="services">
-  <h2>IT Services</h2>
+  <h2>Our Services</h2>
   <div class="services">
-    <div class="card"><h3>Device Repair</h3><p>Laptop & desktop diagnostics, parts replacement, and optimization.</p><span>From ₱499</span></div>
-    <div class="card"><h3>Malware Cleanup</h3><p>Virus, spyware, and unsafe software removal.</p><span>From ₱499</span></div>
-    <div class="card"><h3>Hardware Upgrades</h3><p>SSD, RAM, storage, and performance upgrades.</p><span>From ₱499</span></div>
-    <div class="card"><h3>Website Setup</h3><p>Basic business websites and landing pages.</p><span>From ₱2,499</span></div>
-  </div>
-</section>
-
-<section id="cybersecurity">
-  <h2>Cybersecurity Services</h2>
-  <div class="cyber">
-    <h3>Vulnerability Assessment & Security Hygiene</h3>
-    <p>
-      We specialize in proactive vulnerability scanning using industry-trusted tools
-      combined with human analysis and remediation guidance.
-    </p>
-    <ul>
-      <li>External & internal vulnerability scanning (Nessus-powered)</li>
-      <li>Authenticated scans for accurate results</li>
-      <li>Misconfiguration and patch gap analysis</li>
-      <li>Clear risk reports with prioritized fixes</li>
-      <li>Monthly or quarterly security checks</li>
-    </ul>
+    <div class="service-card">
+      <h3>Screen Replacement</h3>
+      <p>Fix broken or cracked screens for laptops and desktops.</p>
+      <span>Starting at ₱499</span>
+    </div>
+    <div class="service-card">
+      <h3>Virus Removal</h3>
+      <p>Malware, spyware, and virus cleaning for safe performance.</p>
+      <span>Starting at ₱499</span>
+    </div>
+    <div class="service-card">
+      <h3>Hardware Upgrades</h3>
+      <p>RAM, SSD, HDD upgrades and installations.</p>
+      <span>Starting at ₱499</span>
+    </div>
+    <div class="service-card">
+      <h3>Data Recovery</h3>
+      <p>Recover lost or corrupted files securely.</p>
+      <span>Starting at ₱499</span>
+    </div>
+    <div class="service-card">
+      <h3>Website Creation</h3>
+      <p>Basic business website setup for small businesses.</p>
+      <span>Starting at ₱2,499</span>
+    </div>
+    <div class="service-card">
+      <h3>Cybersecurity</h3>
+      <p>Vulnerability scanning and security consulting.</p>
+      <span>Starting at ₱1,499</span>
+    </div>
   </div>
 </section>
 
 <section id="process">
   <h2>How It Works</h2>
-  <p style="text-align:center;max-width:700px;margin:auto">
-    Consultation → Assessment → Action → Ongoing Support
-  </p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="circle"></div>
+      <div class="content"><h4>Contact Us</h4><p>Reach out via phone, form, or Messenger to describe your issue.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="circle"></div>
+      <div class="content"><h4>Schedule Visit</h4><p>Set a convenient time for our technician to visit.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="circle"></div>
+      <div class="content"><h4>Repair & Assessment</h4><p>We fix your device on-site or take it for repair if necessary.</p></div>
+    </div>
+    <div class="timeline-item">
+      <div class="circle"></div>
+      <div class="content"><h4>Payment</h4><p>Only pay if the repair is successful — No Fix, No Pay policy.</p></div>
+    </div>
+  </div>
 </section>
 
+<section id="testimonials">
+  <h2>Testimonials</h2>
+  <div class="testimonials">
+    <div class="testimonials-track" id="testimonialTrack">
+
+      <div class="testimonial">
+        <img src="tm.jpg" alt="Z. Villalobos Testimonial" style="width:400px; max-width:100%; height:auto; border-radius:12px; margin-bottom:1rem;">
+        
+        <p>"Highly recommended
+Very accommodating si kuya at ang bait pa san ka pa.
+leexplain niya ng maayos kung ano yung problema and yung mga alternatives.
+And most of all trustworthy dahil iniwan ko yung laptop sa kanila.
+Thank you so much
+Sa uulitin"</p>
+        <h5>- Z. Villalobos</h5>
+      </div>
+
+      <div class="testimonial">
+        <img src="tm1.jpg" alt="Denver Aquino Testimonial" style="width:400px; max-width:100%; height:auto; border-radius:12px; margin-bottom:1rem;">
+        <p>Sobrang helpful ng lahat ng staff, customer service pati na mga tech, they go for the 'extra mile' in helping their customers, they even check you out from time to time tungkol sa system unit mo even after the repair has been made. I really recommend this shop to those who are in need!
+KUDOS po sa inyong lahat! Very happy with everything from start to finish!</p>
+        <h5>- Denver Aquino</h5>
+      </div>
+
+      <div class="testimonial">
+        <img src="tm2.jpg" alt="Lexter C. Testimonial" style="width:400px; max-width:100%; height:auto; border-radius:12px; margin-bottom:1rem;">
+        <p>Very accommodating staff. Thank you</p>
+        <h5>- Lexter C.</h5>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
 <section id="contact">
-  <h2>Contact & Consultation</h2>
-  <form class="contact-form" action="https://formspree.io/f/xgvgpvez" method="POST">
+  <h2>Contact & Booking</h2>
+  <form class="contact-form" id="bookingForm" action="https://formspree.io/f/xgvgpvez" method="POST">
     <input type="text" name="name" placeholder="Full Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <textarea name="message" placeholder="Describe your concern or security needs" required></textarea>
-    <button type="submit">Request Consultation</button>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <input type="email" name="email" placeholder="Email">
+    <select name="device">
+      <option>Laptop</option>
+      <option>Desktop</option>
+    </select>
+    <textarea name="issue" placeholder="Issue Description" required></textarea>
+    <input type="text" name="location" placeholder="Location/Address" required>
+    <button type="submit">Submit Booking</button>
   </form>
 </section>
 
 <footer>
-  © 2025 Makati Services — IT & Cybersecurity Solutions
+  &copy; 2025 Makati Laptop & Desktop Repair. All rights reserved.
 </footer>
 
 <div class="chat-buttons">
   <a href="https://www.facebook.com/MakatiComputerRepair" target="_blank">💬</a>
 </div>
 
+<script>
+  // Smooth Scroll Buttons
+  function scrollToContact(){ document.getElementById('contact').scrollIntoView({behavior:'smooth'}); }
+  function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+  // Form Submission to Formspree with redirect to thank you page
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if(response.ok){
+        window.location.href = "thankyou.html";
+      } else {
+        alert('Oops! There was a problem submitting your form.');
+      }
+    });
+  });
+
+  // Simple Testimonial Carousel
+  let track = document.getElementById('testimonialTrack');
+  let offset = 0;
+  setInterval(()=>{ offset -= 320; if(Math.abs(offset) >= track.scrollWidth/2) offset=0; track.style.transform = `translateX(${offset}px)`; }, 3000);
+</script>
+
 </body>
 </html>
+
